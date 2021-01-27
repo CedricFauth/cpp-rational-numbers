@@ -3,6 +3,8 @@
 
 int main(int argc, char const *argv[])
 {
-	std::cout << "Hello World" << std::endl;
+	QNumber q1 (6,8);
+	QNumber q2 (0.3);
+	std::cout << q1 << '\n' << q2 << std::endl;
 	return 0;
 }

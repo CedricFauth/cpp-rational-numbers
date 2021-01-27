@@ -14,17 +14,22 @@ QNumber::QNumber(int numerator, int denominator) {
 
 QNumber::QNumber(double dvalue) {
 	int off = 1;
-	while (dvalue-static_cast<int>(dvalue) != 0) {
+	while (dvalue-static_cast<int>(dvalue) != 0 && off < 100000) {
 		off *= 10;
 		dvalue *= 10;
 	}
-	num_ = dvalue;
+
+	//std::cout << off << ' ' << dvalue << ' ' << round(dvalue)/off << std::endl;
+
+	num_ = round(dvalue);
 	denom_ = off;
 
 	simplify();
 }
 
-QNumber::QNumber(float fvalue) : QNumber(static_cast<double>(fvalue)) { }
+QNumber::QNumber(float fvalue) : QNumber(static_cast<double>(fvalue)) {
+	std::cout << "float constructor called" << std::endl;
+}
 
 void QNumber::simplify() {
 	int a = num_ > denom_ ? num_ : denom_;
@@ -44,6 +49,11 @@ int QNumber::gcd(int a, int b){
 		a = b;
 		b = remainder;
 	} while (b != 0);
+
 	return abs(a);
 }
 
+std::ostream& operator<<(std::ostream& os, QNumber& qnum) {
+	os << '(' << qnum.num_ << '/' << qnum.denom_ << ')';
+	return os;
+}
