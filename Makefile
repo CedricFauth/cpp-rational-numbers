@@ -3,14 +3,14 @@ CXXFLAGS = -Wall -pedantic -std=c++11 -Iinclude
 
 all: test clean run
 
-test: main.o number.o
-	$(CXX) $(CXXFLAGS) main.o number.o -o test
+test: main.o qnumber.o
+	$(CXX) $(CXXFLAGS) main.o qnumber.o -o test
 
 main.o:
-	$(CXX) $(CXXFLAGS) -c main.cpp
+	$(CXX) $(CXXFLAGS) -c src/main.cpp
 
-number.o:
-	$(CXX) $(CXXFLAGS) -c src/number.cpp
+qnumber.o:
+	$(CXX) $(CXXFLAGS) -c src/qnumber.cpp
 
 .PHONY: clean run
 
